@@ -5,6 +5,7 @@ package com.example.xiab7798.mycontactapp;
  */
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
@@ -28,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate (SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT) ");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, AGE TEXT, EMAIL TEXT, PHONE TEXT) ");
     }
 
     @Override
@@ -47,7 +48,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
-        if(result==-1) return true;
-        else return false;
+        if(result==-1) return false;
+        else return true;
+    }
+
+    public Cursor getAllData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        return res;
     }
 }
