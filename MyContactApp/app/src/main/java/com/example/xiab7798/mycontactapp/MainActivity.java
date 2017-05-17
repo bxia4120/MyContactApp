@@ -1,6 +1,7 @@
 package com.example.xiab7798.mycontactapp;
 
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editAge;
     EditText editEmail;
     EditText editPhone;
+    EditText editSearch;
     Button btnAddData;
 
     @Override
@@ -24,11 +26,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myDb = new DatabaseHelper (this);
-        
-        editName = (EditText)(findViewById(R.id.editName));
-        editAge = (EditText)(findViewById(R.id.editAge));
-        editEmail = (EditText)(findViewById(R.id.editEmail));
-        editPhone = (EditText)(findViewById(R.id.editPhone));
     }
 
     public void addData (View v) {
@@ -54,17 +51,46 @@ public class MainActivity extends AppCompatActivity {
         Cursor res = myDb.getAllData();
         if (res.getCount() == 0) {
             showMessage("Error", "No data found in database");
-            // put a Log.d message and toast
             return;
         }
         StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i<=res.getCount(); i++) {
-            //buffer.append();
+
+        while (res.moveToNext()) {
+            for (int i = 1; i<=4; i++) {
+                buffer.append(res.getString(i) + "\n");
+            }
+            buffer.append("\n\n");
         }
-        //setup loop with cursor move to next method while loop
-        // append each column to each buffer
+
+        showMessage("Data", buffer.toString());
     }
 
-    private void showMessage(String error, String s) {
+    public void searchData(View v) {
+        editSearch = (EditText)(findViewById(R.id.editSearch));
+        Cursor res = myDb.getAllData();
+        if (res.getCount() == 0) {
+            showMessage("Error", "No data found in database");
+            return;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()) {
+            for (int i = 1; i<=4; i++) {
+                showMessage("Test", editSearch.toString() + "\n\n" + res.getString(i));
+                if (editSearch.getText().toString() == res.getString(i)) {
+                    buffer.append(res.getString(i) + "\n");
+                }
+            }
+            buffer.append("\n\n");
+        }
+        showMessage("Search results", buffer.toString());
+    }
+
+    private void showMessage(String title, String message
+    ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true); //cancel using back button
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }

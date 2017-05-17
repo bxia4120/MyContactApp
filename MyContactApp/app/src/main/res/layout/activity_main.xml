@@ -18,28 +18,28 @@
         android:textStyle="normal"
         android:typeface="normal"
         android:textIsSelectable="false"
-        android:textSize="24dp"
-        android:layout_marginTop="70dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/textView3" />
+        android:textSize="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/editSearch"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="AddData"
         android:id="@+id/button_add"
-        android:layout_marginBottom="46dp"
         android:onClick="addData"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignBaseline="@+id/button"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignEnd="@+id/editPhone" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editName"
         android:layout_alignBottom="@+id/textView"
-        android:layout_alignStart="@+id/editEmail"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/button" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
         android:id="@+id/textView2"
         android:textStyle="normal"
         android:typeface="normal"
-        android:textSize="24dp"
+        android:textSize="16dp"
         android:textColor="#000000"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/textView"
@@ -68,7 +68,7 @@
         android:text="EMAIL"
         android:id="@+id/textView3"
         android:typeface="normal"
-        android:textSize="24dp"
+        android:textSize="16dp"
         android:textColor="#000000"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/editAge"
@@ -79,8 +79,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/editEmail"
         android:layout_alignBottom="@+id/textView3"
-        android:layout_alignStart="@+id/button_add"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/editAge" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
         android:text="PHONE"
         android:id="@+id/textView4"
         android:typeface="normal"
-        android:textSize="24dp"
+        android:textSize="16dp"
         android:textColor="#000000"
         android:layout_below="@+id/textView3"
         android:layout_alignStart="@+id/textView"
@@ -108,7 +108,26 @@
         android:text="CONTACTS"
         android:id="@+id/button"
         android:onClick="viewData"
-        android:layout_alignTop="@+id/button_add"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:onClick="searchData" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editSearch"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignStart="@+id/editName"
+        android:layout_alignEnd="@+id/editName" />
 
 </RelativeLayout>
