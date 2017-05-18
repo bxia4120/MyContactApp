@@ -26,13 +26,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myDb = new DatabaseHelper (this);
-    }
 
-    public void addData (View v) {
         editName = (EditText)(findViewById(R.id.editName));
         editAge = (EditText)(findViewById(R.id.editAge));
         editEmail = (EditText)(findViewById(R.id.editEmail));
         editPhone = (EditText)(findViewById(R.id.editPhone));
+        editSearch = (EditText)(findViewById(R.id.editSearch));
+
+    }
+
+    public void addData (View v) {
         boolean isInserted = myDb.insertData(editName.getText().toString(), editAge.getText().toString(), editEmail.getText().toString(), editPhone.getText().toString());
         if (isInserted==true) {
             Log.d("myContact", "Data insertion successful");
@@ -66,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void searchData(View v) {
-        editSearch = (EditText)(findViewById(R.id.editSearch));
         Cursor res = myDb.getAllData();
         if (res.getCount() == 0) {
             showMessage("Error", "No data found in database");
@@ -75,12 +77,13 @@ public class MainActivity extends AppCompatActivity {
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()) {
             for (int i = 1; i<=4; i++) {
-                showMessage("Test", editSearch.toString() + "\n\n" + res.getString(i));
-                if (editSearch.getText().toString() == res.getString(i)) {
-                    buffer.append(res.getString(i) + "\n");
+                if (editSearch.getText().toString().equals(res.getString(i))) {
+                    for (int j = 1; j <= 4; j++) {
+                        buffer.append(res.getString(j) + "\n");
+                    }
+                    buffer.append("\n\n");
                 }
             }
-            buffer.append("\n\n");
         }
         showMessage("Search results", buffer.toString());
     }
